@@ -4,7 +4,7 @@
 * */
 
 const AnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const CleanPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
@@ -62,14 +62,14 @@ const config = {
 		]
 	},
 	plugins: [
-		new CleanPlugin(['dist']),
+    new CleanWebpackPlugin(),
 		new VueLoaderPlugin(),
 		// css分离
 		new MiniCssExtractPlugin({
 			filename:'[name].[hash].css',
 			chunkFilename:'[id].css'
 		}),
-		new AnalyzerPlugin(),
+		// new AnalyzerPlugin(),
 		// html入口
 		new HtmlPlugin({
 			title:'tools homepage',

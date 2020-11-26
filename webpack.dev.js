@@ -15,7 +15,7 @@ const config = {
 		host:'0.0.0.0',
 		port:'8080',
 		overlay:true,
-		hot:true
+    hot:true,
 	},
 	entry: {
 		index:path.join(__dirname,'src/index.js'),
@@ -48,7 +48,7 @@ const config = {
 				exclude: /node_modules/,
 				use:[
 					'style-loader',
-					'vue-style-loader',
+					// 'vue-style-loader',
 					'css-loader',
 					'sass-loader'
 				]
@@ -63,8 +63,6 @@ const config = {
 		]
 	},
 	plugins: [
-		// 显示模块相对路径，比如HMR更新时显示的信息
-		new Webpack.NamedModulesPlugin(),
 		// 开启HMR
 		new Webpack.HotModuleReplacementPlugin(),
 		// vueloader
