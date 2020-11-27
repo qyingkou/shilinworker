@@ -213,7 +213,7 @@
 </template>
 
 <script>
-    import html2canvas from 'html2canvas';
+    import domtoimage from "dom-to-image";
     import fn from './javascript/module';
 
     export default {
@@ -275,16 +275,21 @@
 				this.page.height = parseInt(pageHeight);
 			},
 			// 生成图片
-			generate(){
-				html2canvas(document.getElementById('canvas'),{
-					scale:2
-                }).then(function (canvas) {
-					var node_image = document.getElementById('image');
-					node_image.innerHTML = '<p>生成时间：' + new Date() + '</p>';
-					node_image.appendChild(canvas);
-
-				})
-			},
+			generate() {
+      var node_page = document.getElementById("canvas");
+      var node_image = document.getElementById("image");
+      domtoimage
+        .toPng(node_page)
+        .then(dataUrl => {
+          var img = new Image();
+          img.src = dataUrl;
+          img.style.width = "100%";
+          node_image.appendChild(img);
+        })
+        .catch(function(error) {
+          console.error("oops, something went wrong!", error);
+        });
+    },
 			// 将选择文件
 			doFilesSelect(type){
 				this.$refs['fileIpt'].click();
